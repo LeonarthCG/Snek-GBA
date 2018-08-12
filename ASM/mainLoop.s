@@ -38,6 +38,15 @@ noButtons:
 
 swi	#5		@wait for vblank
 
+ldr	r0,=copyBuffers
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#0
+strb	r1,[r0]		@set bg 0 to not be updated
+
 ldrb	r0,=#0x02000000
 ldrb	r1,[r0,#3]	@speed
 ldrb	r2,[r0,#4]	@counter
@@ -48,6 +57,11 @@ cmp	r2,r1
 blo	skipSnake	@if counter is lower than speed, skip game logic and wait another frame
 mov	r3,#0
 strb	r3,[r0,#4]	@counter
+
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#1
+strb	r1,[r0]		@set bg 0 to be updated
 
 ldr	r0,=turnSnake
 mov	lr,r0

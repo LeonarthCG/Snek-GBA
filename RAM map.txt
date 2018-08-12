@@ -1,0 +1,16 @@
+$02000000  SHORT  Snake current size
+$02000002  BYTE   Snake facing direction
+$02000003  BYTE   Game speed
+$02000004  BYTE   Counter
+$02000005  BYTE   Buttons being pressed
+$02000006  SHORT  Egg coordinates
+$02000008  WORD   RNG seed
+$0200000C  BYTE   This byte is set after the first time RNG is used
+$0200000D  BYTE   Game state
+$0200000E  SHORT  Snake new size
+$02000010  BYTE   Update background map 0 flag
+$02000011  BYTE   Update background map 1 flag
+$02000012  BYTE   Update background map 2 flag
+$02000013  BYTE   Update background map 3 flag
+...
+$02000020  LIST   Snake body piece coordinates

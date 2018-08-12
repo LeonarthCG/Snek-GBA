@@ -36,6 +36,9 @@ rng:
 drawTile:
 #inctext lyn "ASM\drawTile.elf" //draw tile at given coords and background layer
 
+copyBuffers:
+#inctext lyn "ASM\copyBuffers.elf" //copy the tilemap buffers over to their destination
+
 makeTileAttribute:
 #inctext lyn "ASM\makeTileAttribute.elf" //piece together the short for the tile based on the attributes
 
@@ -78,6 +81,13 @@ facing directions of the snake:
 */
 
 //the snake's longest possible length is 540, so I'm going to limit it to that and cause a game over if it's reched
+
+ALIGN 4
+bgTilemapsBuffer:
+WORD $03000000
+WORD $0
+WORD $0
+WORD $0
 
 ALIGN 4
 bgTilemaps:

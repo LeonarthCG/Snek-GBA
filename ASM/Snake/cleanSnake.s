@@ -1,7 +1,9 @@
 .thumb
 
-ldr	r0,=#0x0600F800
-ldr	r1,=#0x0600FD00
+ldr	r0,=bgTilemapsBuffer
+ldr	r0,[r0]
+ldr	r1,=#0x500
+add	r1,r0
 mov	r2,#0
 
 loop:
