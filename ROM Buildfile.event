@@ -1,0 +1,97 @@
+//making the header
+
+#define armJump(label) "WORD 0xEA000000 + (((label-currentoffset-8)/4)&0xFFFFFF)"
+
+ORG $0
+armJump(romStart) //arm instruction, jump to 0xC0
+#incbin "bitmap.bin" //displayed, then checked on bootup, gba hangs without this
+BYTE 0x20 0x20 0x20 0x20 0x20 0x20 0x20 0x20 0x20 0x20 0x20 0x20 //uppercase ascii, max 12 characters
+BYTE 0x20 0x20 0x20 0x20 //uppercase ascii, 4 characters
+BYTE 0x20 0x20 //uppercase ascii, 2 characters
+BYTE $96 //fixed value
+BYTE 0 //main unit, 0 for gba
+BYTE 0 //device type
+BYTE 0 0 0 0 0 0 0 //some empty bytes
+BYTE 0 //software version
+BYTE $A7 //checksum of bytes A0 to BC, ((0 - each byte) - $19 )&0xFF, I should make a tool to calculate it at some point
+SHORT 0 //some empty bytes
+
+//the strings for the header
+PUSH; ORG $A0; String(DEMO); POP
+PUSH; ORG $AC; String(DEMO); POP
+PUSH; ORG $B0; String(00); POP
+
+romStart:
+#inctext lyn "ASM\boot.elf" //change to thumb and set the background layers, tiles and palettes up
+
+mainLoop:
+#inctext lyn "ASM\mainLoop.elf" //wait for vblank and execute the gameplay routines
+
+interrupt:
+#inctext lyn "ASM\interrupt.elf" //change to thumb after waiting for vblank and acknowledge interrupt
+
+rng:
+#inctext lyn "ASM\rng.elf" //get random number, return it in r0 and also set it as the next seed
+
+drawTile:
+#inctext lyn "ASM\drawTile.elf" //draw tile at given coords and background layer
+
+makeTileAttribute:
+#inctext lyn "ASM\makeTileAttribute.elf" //piece together the short for the tile based on the attributes
+
+loadData:
+#inctext lyn "ASM\loadData.elf" //load data from source to destination
+
+startSnake:
+#inctext lyn "ASM\Snake\startSnake.elf" //prepare the snake's starting position
+
+turnSnake:
+#inctext lyn "ASM\Snake\turnSnake.elf" //change the direction the snake is heading towards
+//the snake can't change direction to the one she is already facing towards nor the one opposite to it
+//button presses are saved each frame, even if the game logic isn't run each frame, and are cleared at the end of this routine
+//this allows the player to input a direction for the snake to turn to without having to hold the button down waiting for the game logic
+//the snake also can't turn towards the border of the screen if adjacent to it
+
+moveSnake:
+#inctext lyn "ASM\Snake\moveSnake.elf" //check if the snake has grown and move all pieces of the body as needed
+
+cleanSnake:
+#inctext lyn "ASM\Snake\cleanSnake.elf" //wipe the background layer to avoid leftover snake bits
+
+drawSnake:
+#inctext lyn "ASM\Snake\drawSnake.elf" //draw snake according to the positions
+
+drawSnakeBody:
+#inctext lyn "ASM\Snake\drawSnakeBody.elf" //routine that specifically draws the body segments (so not head/tail/tongue)
+//the checks got long enough for it to justify a routine
+//snake body shapes are the -, the |, the luigi, the waluigi, the mirror luigi and the mirror waluigi, of course
+
+/*
+facing directions of the snake:
+     1
+     ^
+     |
+0 <- o -> 3
+     |
+     v
+     2
+*/
+
+//the snake's longest possible length is 540, so I'm going to limit it to that and cause a game over if it's reched
+
+ALIGN 4
+bgTilemaps:
+WORD $0600F800
+WORD $0
+WORD $0
+WORD $0
+
+ALIGN 4
+snekIMG:
+SHORT 0 352
+#incext png2dmp "Graphics\snek.png"
+
+ALIGN 4
+snekPAL:
+SHORT 0 8
+#incext png2dmp "Graphics\snek.png" --palette-only
