@@ -63,6 +63,10 @@ add	r0,#0x10
 mov	r1,#1
 strb	r1,[r0]		@set bg 0 to be updated
 
+ldr	r0,=makeEgg
+mov	lr,r0
+.short	0xF800
+
 ldr	r0,=turnSnake
 mov	lr,r0
 .short	0xF800
@@ -71,6 +75,19 @@ ldr	r0,=moveSnake
 mov	lr,r0
 .short	0xF800
 
+ldr	r0,=eatEgg
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=makeEgg
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=#0x02000000
+ldrb	r0,[r0,#0xD]
+cmp	r0,#0xF0
+bhi	nobg0draw
+
 ldr	r0,=cleanSnake
 mov	lr,r0
 .short	0xF800
@@ -78,6 +95,12 @@ mov	lr,r0
 ldr	r0,=drawSnake
 mov	lr,r0
 .short	0xF800
+
+ldr	r0,=drawEgg
+mov	lr,r0
+.short	0xF800
+
+nobg0draw:
 
 skipSnake:
 

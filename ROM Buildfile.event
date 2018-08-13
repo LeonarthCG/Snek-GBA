@@ -54,9 +54,13 @@ turnSnake:
 //button presses are saved each frame, even if the game logic isn't run each frame, and are cleared at the end of this routine
 //this allows the player to input a direction for the snake to turn to without having to hold the button down waiting for the game logic
 //the snake also can't turn towards the border of the screen if adjacent to it
+//in addition, the snake can't turn if doing so is going to make her face her own body immediately
 
 moveSnake:
 #inctext lyn "ASM\Snake\moveSnake.elf" //check if the snake has grown and move all pieces of the body as needed
+
+bonkSnake:
+#inctext lyn "ASM\Snake\bonkSnake.elf" //check if the given coords are already occupied by snake, return 1 if it is
 
 cleanSnake:
 #inctext lyn "ASM\Snake\cleanSnake.elf" //wipe the background layer to avoid leftover snake bits
@@ -68,6 +72,15 @@ drawSnakeBody:
 #inctext lyn "ASM\Snake\drawSnakeBody.elf" //routine that specifically draws the body segments (so not head/tail/tongue)
 //the checks got long enough for it to justify a routine
 //snake body shapes are the -, the |, the luigi, the waluigi, the mirror luigi and the mirror waluigi, of course
+
+makeEgg:
+#inctext lyn "ASM\Egg\makeEgg.elf" //spawn egg and write the coords and tile to ram for the drawEgg routine
+
+eatEgg:
+#inctext lyn "ASM\Egg\eatEgg.elf" //check if head and egg are in the same coords, and if so remove egg and add size to snake
+
+drawEgg:
+#inctext lyn "ASM\Egg\drawEgg.elf" //draw egg according to the coords and tile in ram
 
 /*
 facing directions of the snake:

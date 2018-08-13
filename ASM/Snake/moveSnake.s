@@ -1,15 +1,28 @@
 .thumb
 
+push	{lr}
 push	{r4,r5}
 
 ldr	r4,=#0x02000000
+ldrb	r0,[r4,#0xD]
+cmp	r0,#0xF0
+bhi	EndTrampolin
 mov	r5,r4
 ldrh	r0,[r5]
 cmp	r0,#0
-beq	gameOver
+beq	gameOverTrampolin
 ldr	r3,=#540
 cmp	r0,r3
-beq	gameOver
+beq	gameOverWinTrampolin
+
+b	skipTrampolin
+EndTrampolin:
+b	End
+gameOverTrampolin:
+b	gameOver
+gameOverWinTrampolin:
+b	gameOverWin
+skipTrampolin:
 
 mov	r3,r5
 add	r3,#0x20
@@ -110,6 +123,15 @@ b	End
 
 domove:
 @check if the snake is going to hit herself
+push	{r0-r3}
+mov	r0,r1
+mov	r1,r2
+ldr	r3,=bonkSnake
+mov	lr,r3
+.short	0xF800
+cmp	r0,#1
+beq	gameOverBonk
+pop	{r0-r3}
 strb	r1,[r4]
 strb	r2,[r4,#1]
 b	End
@@ -163,6 +185,15 @@ ldrh	r3,[r4]
 add	r3,#1
 strh	r3,[r4]
 @check if the snake is going to hit herself
+push	{r0-r3}
+mov	r0,r1
+mov	r1,r2
+ldr	r3,=bonkSnake
+mov	lr,r3
+.short	0xF800
+cmp	r0,#1
+beq	gameOverBonk
+pop	{r0-r3}
 strb	r1,[r4,r0]
 add	r0,#1
 strb	r2,[r4,r0]
@@ -170,8 +201,20 @@ b	End
 
 End:
 pop	{r4,r5}
-bx	lr
+pop	{r0}
+bx	r0
+
+gameOverBonk:
+pop	{r0-r3}
 
 gameOver:
-pop	{r4,r5}
-bx	lr
+ldr	r0,=#0x02000000
+mov	r1,#0xFF
+strb	r1,[r0,#0xD]
+b	End
+
+gameOverWin:
+ldr	r0,=#0x02000000
+mov	r1,#0xFE
+strb	r1,[r0,#0xD]
+b	End

@@ -12,5 +12,9 @@ $02000010  BYTE   Update background map 0 flag
 $02000011  BYTE   Update background map 1 flag
 $02000012  BYTE   Update background map 2 flag
 $02000013  BYTE   Update background map 3 flag
+$02000014  BYTE   Tile to use for egg
+..
+$02000016  SHORT  Length of list at $02005000
 ...
 $02000020  LIST   Snake body piece coordinates
+$02005000  LIST   Buffer with available tiles for eggs
