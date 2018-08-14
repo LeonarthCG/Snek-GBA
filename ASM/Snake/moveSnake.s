@@ -4,6 +4,8 @@ push	{lr}
 push	{r4,r5}
 
 ldr	r4,=#0x02000000
+ldrh	r0,[r4,#0x20]
+strh	r0,[r4,#0x1A]
 ldrb	r0,[r4,#0xD]
 cmp	r0,#0xF0
 bhi	EndTrampolin
@@ -14,15 +16,6 @@ beq	gameOverTrampolin
 ldr	r3,=#540
 cmp	r0,r3
 beq	gameOverWinTrampolin
-
-b	skipTrampolin
-EndTrampolin:
-b	End
-gameOverTrampolin:
-b	gameOver
-gameOverWinTrampolin:
-b	gameOverWin
-skipTrampolin:
 
 mov	r3,r5
 add	r3,#0x20
@@ -37,25 +30,25 @@ ldrb	r3,[r5,#2]
 cmp	r3,#0
 bne	dontcheckleft
 cmp	r1,#0
-beq	gameOver
+beq	gameOverTrampolin
 dontcheckleft:
 
 cmp	r3,#3
 bne	dontcheckright
 cmp	r1,#0x1D
-beq	gameOver
+beq	gameOverTrampolin
 dontcheckright:
 
 cmp	r3,#1
 bne	dontcheckup
 cmp	r2,#2
-beq	gameOver
+beq	gameOverTrampolin
 dontcheckup:
 
 cmp	r3,#2
 bne	dontcheckdown
 cmp	r2,#0x13
-beq	gameOver
+beq	gameOverTrampolin
 dontcheckdown:
 
 ldrh	r0,[r5]
@@ -87,6 +80,15 @@ add	r4,r0
 ldrb	r1,[r4]		@head x
 ldrb	r2,[r4,#1]	@head y
 ldrb	r3,[r5,#2]	@facing
+
+b	skipTrampolin
+EndTrampolin:
+b	End
+gameOverTrampolin:
+b	gameOver
+gameOverWinTrampolin:
+b	gameOverWin
+skipTrampolin:
 
 cmp	r3,#0
 bne	dontmoveleft
@@ -197,6 +199,8 @@ pop	{r0-r3}
 strb	r1,[r4,r0]
 add	r0,#1
 strb	r2,[r4,r0]
+mov	r0,#0
+strh	r0,[r4,#0x1A]
 b	End
 
 End:

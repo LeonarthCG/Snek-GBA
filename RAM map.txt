@@ -1,7 +1,7 @@
 $02000000  SHORT  Snake current size
 $02000002  BYTE   Snake facing direction
 $02000003  BYTE   Game speed
-$02000004  BYTE   Counter
+$02000004  BYTE   1 if counter has ever been used
 $02000005  BYTE   Buttons being pressed
 $02000006  SHORT  Egg coordinates
 $02000008  WORD   RNG seed
@@ -13,8 +13,10 @@ $02000011  BYTE   Update background map 1 flag
 $02000012  BYTE   Update background map 2 flag
 $02000013  BYTE   Update background map 3 flag
 $02000014  BYTE   Tile to use for egg
-..
+$02000015  BYTE   Current fade coeficient
 $02000016  SHORT  Length of list at $02005000
+$02000018  SHORT  FPS counter last time logic was ran
+$0200001A  SHORT  Previous position of tail (used for the list at $02005000), 0 if the snek just grew
 ...
 $02000020  LIST   Snake body piece coordinates
-$02005000  LIST   Buffer with available tiles for eggs
+$02005000  LIST   Buffer with available tiles for eggs, updated when the snake moves

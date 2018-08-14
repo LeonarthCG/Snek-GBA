@@ -15,6 +15,16 @@ mov	r2,#0xF
 add	r0,r2
 mvn	r0,r0
 
+ldr	r2,=#0x04000130
+ldrb	r2,[r2]
+mov	r3,r2
+mvn	r2,r2
+lsr	r3,#4
+cmp	r3,#0xF
+beq	nobuttons
+mov	r0,r2
+nobuttons:
+
 @get current facing and remove that and the opposite from the button presses
 ldrb	r3,[r1,#2]
 mov	r2,#0x30

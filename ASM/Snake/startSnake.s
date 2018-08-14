@@ -10,9 +10,11 @@ sub	r0,#1
 strh	r0,[r1,#2]
 sub	r0,#1
 strh	r0,[r1,#4]
+sub	r0,#1
+strh	r0,[r1,#6]
 
 @set starting size of snake
-mov	r0,#3
+mov	r0,#4
 ldr	r1,=#0x02000000
 strh	r0,[r1]
 strh	r0,[r1,#0xE]

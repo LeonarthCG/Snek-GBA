@@ -1,28 +1,92 @@
 .thumb
 
+ldr	r0,=fillDest
+mov	lr,r0
+mov	r0,#0
+ldr	r1,=bgTilemapsBuffer
+ldr	r1,[r1]
+ldr	r2,=#0x200
+.short	0xF800
+
+ldr	r0,=fillDest
+mov	lr,r0
+mov	r0,#0
+ldr	r1,=bgTilemapsBuffer
+ldr	r1,[r1,#4]
+ldr	r2,=#0x200
+.short	0xF800
+
+@temporary black border
+ldr	r0,=fillDest
+mov	lr,r0
+ldr	r0,=#0x000A000A
+ldr	r1,=bgTilemapsBuffer
+ldr	r1,[r1]
+ldr	r2,=#0x20
+.short	0xF800
+
+@set background 0 to 16 colors mode
+ldr	r0,=#0x04000000
+mov	r1,#1
+strb	r1,[r0,#8]
+
+@disable bg 1 for now
+mov	r1,#1
+strb	r1,[r0,#1]
+
+ldr	r0,=snekIMG
+ldr	r1,=#0x06000000
+ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+
+ldr	r0,=snekPAL
+ldr	r1,=#0x05000000
+ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+
 ldrb	r0,=#0x02000000
-mov	r1,#0x8
+mov	r1,#8
 strb	r1,[r0,#3]	@speed
-mov	r1,#0
-strb	r1,[r0,#4]	@counter, game logic will only trigger if the counter matches the speed or is higher (in case of powerups)
-
-ldr	r0,=#0x04000200
-mov	r1,#1
-strb	r1,[r0,#8]	@set Master Interrupt Control to 1, enabling interrupts
-
-ldr	r0,=#0x04000200
-mov	r1,#1
-strh	r1,[r0]		@set first bit of REG_IE (enable irq v-blank)
-
-ldr	r0,=#0x04000004
-mov	r2,#8
-strh	r2,[r0]		@set 3rd bit of DISPSTAT (enable irq v-blank)
-
-ldr	r0,=#0x03007FFC
-ldr	r1,=interrupt
-str	r1,[r0]		@set the interrupt routine
 
 ldr	r0,=startSnake
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#1
+strb	r1,[r0]		@set bg 0 and 1 to be updated
+strb	r1,[r0,#1]
+
+ldr	r0,=drawSnake
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=makeEggMap
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=makeEgg
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=drawEgg
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=copyBuffers
+mov	lr,r0
+.short	0xF800
+
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#0
+strb	r1,[r0]		@set bg 0 and 1 to not be updated
+strb	r1,[r0,#1]
+
+ldr	r0,=fadeIn
 mov	lr,r0
 .short	0xF800
 
@@ -36,8 +100,6 @@ beq	noButtons
 strb	r1,[r2,#5]
 noButtons:
 
-swi	#5		@wait for vblank
-
 ldr	r0,=copyBuffers
 mov	lr,r0
 .short	0xF800
@@ -47,25 +109,41 @@ add	r0,#0x10
 mov	r1,#0
 strb	r1,[r0]		@set bg 0 to not be updated
 
+ldr	r2,=#0x02000000
+ldr	r3,=#0x04000130
+ldrb	r1,[r3]		@save button presses so that the player does not need to hold down the button until the counter matches the speed
+lsr	r1,#4
+cmp	r1,#0xF
+beq	noButtons2
+strb	r1,[r2,#5]
+noButtons2:
+
 ldrb	r0,=#0x02000000
+ldr	r3,=#0x04000100
+ldrh	r3,[r3,#4]	@counter
+ldrb	r1,[r0,#4]	@counter checked
+cmp	r1,#1
+beq	counterused
+strh	r3,[r0,#0x18]	@counter last time logic was ran
+mov	r1,#1
+strb	r1,[r0,#4]	@counter checked
+counterused:
 ldrb	r1,[r0,#3]	@speed
-ldrb	r2,[r0,#4]	@counter
-mov	r3,r2
-add	r3,#1
-strb	r3,[r0,#4]	@counter
-cmp	r2,r1
-blo	skipSnake	@if counter is lower than speed, skip game logic and wait another frame
-mov	r3,#0
-strb	r3,[r0,#4]	@counter
+ldrh	r2,[r0,#0x18]	@counter last time logic was ran
+cmp	r3,r2
+blo	runSnake
+add	r2,r1
+cmp	r3,r2
+bhs	runSnake
+b	skipSnake	@skip game logic
+
+runSnake:
+strh	r3,[r0,#0x18]	@update counter
 
 ldr	r0,=#0x02000000
 add	r0,#0x10
 mov	r1,#1
 strb	r1,[r0]		@set bg 0 to be updated
-
-ldr	r0,=makeEgg
-mov	lr,r0
-.short	0xF800
 
 ldr	r0,=turnSnake
 mov	lr,r0
@@ -79,6 +157,10 @@ ldr	r0,=eatEgg
 mov	lr,r0
 .short	0xF800
 
+ldr	r0,=updateEggMap
+mov	lr,r0
+.short	0xF800
+
 ldr	r0,=makeEgg
 mov	lr,r0
 .short	0xF800
@@ -88,8 +170,13 @@ ldrb	r0,[r0,#0xD]
 cmp	r0,#0xF0
 bhi	nobg0draw
 
-ldr	r0,=cleanSnake
+ldr	r0,=fillDest
 mov	lr,r0
+mov	r0,#0
+ldr	r1,=bgTilemapsBuffer
+ldr	r1,[r1]
+add	r1,#0x80
+ldr	r2,=#0x120
 .short	0xF800
 
 ldr	r0,=drawSnake
@@ -102,6 +189,8 @@ mov	lr,r0
 
 nobg0draw:
 
-skipSnake:
+b	main
 
+skipSnake:
+swi	#5		@wait for vblank
 b	main

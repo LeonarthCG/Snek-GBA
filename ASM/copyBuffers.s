@@ -9,7 +9,7 @@ loop1:
 mov	r6,r7
 lsl	r6,#2
 mov	r2,#0
-ldr	r3,=#0x5000
+ldr	r3,=#0x500
 ldr	r0,=#0x02000000
 add	r0,#0x10
 ldrb	r0,[r0,r7]

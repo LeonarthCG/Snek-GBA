@@ -12,7 +12,7 @@ bne	End
 mov	r3,#0
 strh	r3,[r0,#0x6]	@destroy egg
 ldrh	r3,[r0,#0xE]
-add	r3,#1		@add size
+add	r3,#4		@add size
 strh	r3,[r0,#0xE]
 
 End:
