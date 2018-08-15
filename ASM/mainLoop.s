@@ -16,6 +16,14 @@ ldr	r1,[r1,#4]
 ldr	r2,=#0x200
 .short	0xF800
 
+@make the bg2 background
+ldr	r0,=backgroundgridTSA
+ldr	r1,=bgTilemaps
+ldr	r1,[r1,#8]
+ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+
 @temporary black border
 ldr	r0,=fillDest
 mov	lr,r0
@@ -30,9 +38,13 @@ ldr	r0,=#0x04000000
 mov	r1,#1
 strb	r1,[r0,#8]
 
-@disable bg 1 for now
-mov	r1,#1
+@disable bg 1 for now, enable bg 2
+mov	r1,#5
 strb	r1,[r0,#1]
+
+@lower bg 2 priority
+mov	r1,#3
+strb	r1,[r0,#0xC]
 
 ldr	r0,=snekIMG
 ldr	r1,=#0x06000000
@@ -55,10 +67,12 @@ mov	lr,r0
 .short	0xF800
 
 ldr	r0,=#0x02000000
-add	r0,#0x10
+mov	r1,#0
+strb	r1,[r0,#2]	@reset facing direction
+strb	r1,[r0,#0xD]	@reset game state
 mov	r1,#1
-strb	r1,[r0]		@set bg 0 and 1 to be updated
-strb	r1,[r0,#1]
+strb	r1,[r0,#0x10]	@set bg 0 and 1 to be updated
+strb	r1,[r0,#0x11]
 
 ldr	r0,=drawSnake
 mov	lr,r0
@@ -140,6 +154,11 @@ b	skipSnake	@skip game logic
 runSnake:
 strh	r3,[r0,#0x18]	@update counter
 
+@check for game over
+ldrb	r3,[r0,#0xD]
+cmp	r3,#0xFF
+beq	gameover
+
 ldr	r0,=#0x02000000
 add	r0,#0x10
 mov	r1,#1
@@ -170,15 +189,6 @@ ldrb	r0,[r0,#0xD]
 cmp	r0,#0xF0
 bhi	nobg0draw
 
-ldr	r0,=fillDest
-mov	lr,r0
-mov	r0,#0
-ldr	r1,=bgTilemapsBuffer
-ldr	r1,[r1]
-add	r1,#0x80
-ldr	r2,=#0x120
-.short	0xF800
-
 ldr	r0,=drawSnake
 mov	lr,r0
 .short	0xF800
@@ -194,3 +204,12 @@ b	main
 skipSnake:
 swi	#5		@wait for vblank
 b	main
+
+gameover:
+@back to title screen
+ldr	r0,=fadeOut
+mov	lr,r0
+.short	0xF800
+ldr	r0,=titlescreenLoop
+mov	lr,r0
+.short	0xF800

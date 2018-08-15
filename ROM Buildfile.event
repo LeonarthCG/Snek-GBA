@@ -136,14 +136,14 @@ ALIGN 4
 bgTilemapsBuffer:
 WORD $03000000
 WORD $03000800
-WORD $0
+WORD $03001000
 WORD $0
 
 ALIGN 4
 bgTilemaps:
 WORD $0600F800
 WORD $0600F000
-WORD $0
+WORD $0600E800
 WORD $0
 
 ALIGN 4
@@ -180,4 +180,9 @@ ALIGN 4
 presstartTSA:
 SHORT 0 25
 #incbin "Graphics\pressstart.tsa.bin"
+
+ALIGN 4
+backgroundgridTSA:
+SHORT 0 320
+#incbin "Graphics\backgroundgrid.tsa.bin"
 

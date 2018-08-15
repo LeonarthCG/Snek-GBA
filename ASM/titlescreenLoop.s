@@ -1,7 +1,10 @@
 .thumb
 
-@set background 0 to 256 colors mode, and change priority
 ldr	r0,=#0x04000000
+mov	r1,#3
+strb	r1,[r0,#1]	@turn on bg layers 0 and 1
+
+@set background 0 to 256 colors mode, and change priority
 mov	r1,#0x81
 strb	r1,[r0,#8]
 

@@ -1,14 +1,48 @@
 .thumb
 
 push	{lr}
-push	{r4-r6}
+push	{r4-r7}
 ldr	r4,=#0x02000000
+@erase old tongue if it exists
+ldr	r0,=bgTilemapsBuffer
+ldr	r0,[r0]
+ldr	r1,=#0x500
+add	r1,r0
+tongueloop:
+cmp	r0,r1
+beq	donetongue
+ldrb	r2,[r0]
+cmp	r2,#1
+beq	erasetongue
+cmp	r2,#6
+beq	erasetongue
+add	r0,#2
+b	tongueloop
+erasetongue:
+mov	r2,#0
+strh	r2,[r0]
+donetongue:
+@erase old tail
+ldrh	r0,[r4,#0x1A]
+cmp	r0,#0
+beq	erasedtail
+ldr	r3,=drawTile
+mov	lr,r3
+ldrb	r2,[r4,#0x1A]	@x
+ldrb	r3,[r4,#0x1B]	@y
+mov	r1,#0		@attribute
+mov	r0,#0		@bg layer
+.short	0xF800
+erasedtail:
 ldrh	r5,[r4]		@size
 cmp	r5,#0
-beq	End
+bne	dontEnd
+b	End
 dontEnd:
 sub	r5,#1
 lsl	r5,#1
+mov	r7,r5
+sub	r7,#4
 
 @get snake size
 sneakLoop:
@@ -30,6 +64,11 @@ nextEntry:
 cmp	r5,#0
 beq	End
 sub	r5,#2
+cmp	r5,r7
+beq	skip
+b	sneakLoop
+skip:
+mov	r7,r5
 b	sneakLoop
 
 drawTail:
@@ -161,6 +200,6 @@ endtongue:
 b	nextEntry
 
 End:
-pop	{r4-r6}
+pop	{r4-r7}
 pop	{r0}
 bx	r0

@@ -34,9 +34,6 @@ mov	r1,#0x10
 add	r2,#4
 strb	r1,[r0,r2]	@start with a black screen
 
-mov	r1,#3
-strb	r1,[r0,#1]	@turn on bg layers 0 and 1
-
 @enable timer 0, 1 and 2
 ldr	r1,=#0x100
 ldr	r2,=#0xEEDB
@@ -58,6 +55,8 @@ mov	r1,#0x1F
 strb	r1,[r0,#9]	@set the offset for the bg map 0
 mov	r1,#0x1E
 strb	r1,[r0,#11]	@set the offset for the bg map 1
+mov	r1,#0x1D
+strb	r1,[r0,#13]	@set the offset for the bg map 2
 
 swi	#5
 
