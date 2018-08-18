@@ -1,5 +1,13 @@
 .thumb
 
+@reset ram
+ldr	r0,=fillDest
+mov	lr,r0
+mov	r0,#0
+ldr	r1,=#0x02000000
+ldr	r2,=#0x1600
+.short	0xF800
+
 ldr	r0,=fillDest
 mov	lr,r0
 mov	r0,#0
@@ -58,7 +66,7 @@ ldr	r3,=loadData
 mov	lr,r3
 .short	0xF800
 
-ldrb	r0,=#0x02000000
+ldr	r0,=#0x02000000
 mov	r1,#8
 strb	r1,[r0,#3]	@speed
 
@@ -132,7 +140,7 @@ beq	noButtons2
 strb	r1,[r2,#5]
 noButtons2:
 
-ldrb	r0,=#0x02000000
+ldr	r0,=#0x02000000
 ldr	r3,=#0x04000100
 ldrh	r3,[r3,#4]	@counter
 ldrb	r1,[r0,#4]	@counter checked

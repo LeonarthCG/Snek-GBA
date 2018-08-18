@@ -61,6 +61,7 @@ mov	lr,r0
 .short	0xF800
 
 titlescreen:
+swi	#5
 ldr	r0,=#0x04000130
 ldrb	r0,[r0]
 mov	r1,#8
