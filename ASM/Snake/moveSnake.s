@@ -15,7 +15,7 @@ cmp	r0,#0
 beq	gameOverTrampolin
 ldr	r3,=#540
 cmp	r0,r3
-beq	gameOverWinTrampolin
+bhs	gameOverWinTrampolin
 
 mov	r3,r5
 add	r3,#0x20

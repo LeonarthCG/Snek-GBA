@@ -69,6 +69,10 @@ fillDest:
 #inctext lyn "ASM\fillDest.elf" //fill destination with given value and size
 
 ALIGN 4
+updateScore:
+#inctext lyn "ASM\updateScore.elf" //update the SIZE and HIGH SCORE numbers, and save high score if needed
+
+ALIGN 4
 startSnake:
 #inctext lyn "ASM\Snake\startSnake.elf" //prepare the snake's starting position
 
@@ -92,6 +96,10 @@ bonkSnake:
 ALIGN 4
 drawSnake:
 #inctext lyn "ASM\Snake\drawSnake.elf" //draw snake according to the positions
+
+ALIGN 4
+killSnake:
+#inctext lyn "ASM\Snake\killSnake.elf" //make the death animation happen
 
 ALIGN 4
 drawSnakeBody:
@@ -130,25 +138,25 @@ facing directions of the snake:
      2
 */
 
-//the snake's longest possible length is 540, so I'm going to limit it to that and cause a game over if it's reched
+//the snake's longest possible length is 540, so I'm going to limit it to that and cause a game over if it's reched (with a win message?)
 
 ALIGN 4
 bgTilemapsBuffer:
 WORD $03000000
 WORD $03000800
 WORD $03001000
-WORD $0
+WORD $03001800
 
 ALIGN 4
 bgTilemaps:
 WORD $0600F800
 WORD $0600F000
 WORD $0600E800
-WORD $0
+WORD $0600E000
 
 ALIGN 4
 snekIMG:
-SHORT 0 352
+SHORT 0 440
 #incext png2dmp "Graphics\snek.png"
 
 ALIGN 4
@@ -185,4 +193,9 @@ ALIGN 4
 backgroundgridTSA:
 SHORT 0 320
 #incbin "Graphics\backgroundgrid.tsa.bin"
+
+ALIGN 4
+scoreTSA:
+SHORT 0 32
+#incbin "Graphics\score.tsa.bin"
 

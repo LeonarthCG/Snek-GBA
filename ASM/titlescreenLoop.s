@@ -60,14 +60,43 @@ ldr	r0,=fadeIn
 mov	lr,r0
 .short	0xF800
 
+ldr	r0,=#0x02000000
+mov	r1,#0
+strh	r1,[r0,#0x18]
+
 titlescreen:
 swi	#5
+@check if the press start should turn on/off
+ldr	r0,=#0x02000000
+ldrh	r2,[r0,#0x18]
+add	r2,#1
+cmp	r2,#0x20
+bne	dontFlicker
+ldr	r1,=#0x04000000
+mov	r2,#2
+ldrb	r3,[r1,#1]
+and	r3,r2
+cmp	r3,#2
+beq	setnodisplay
+mov	r2,#3
+b	afterjump
+setnodisplay:
+mov	r2,#1
+afterjump:
+strb	r2,[r1,#1]
+mov	r2,#0
+dontFlicker:
+strh	r2,[r0,#0x18]
 ldr	r0,=#0x04000130
 ldrb	r0,[r0]
 mov	r1,#8
 and	r0,r1
 cmp	r0,#0
 bne	titlescreen
+
+ldr	r0,=#0x04000000
+mov	r1,#3
+strb	r1,[r0,#1]
 
 ldr	r0,=fadeOut
 mov	lr,r0
