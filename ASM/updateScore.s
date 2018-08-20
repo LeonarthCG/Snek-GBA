@@ -131,6 +131,23 @@ mov	r2,#0x19
 mov	r3,#0
 .short	0xF800
 
+@draw golden egg
+ldr	r0,=#0x0E000000
+ldrb	r1,[r0,#1]
+ldrb	r0,[r0]
+lsl	r1,#8
+orr	r0,r1
+ldr	r1,=#540
+cmp	r0,r1
+bne	End
+ldr	r0,=drawTile
+mov	lr,r0
+mov	r0,#3
+mov	r1,#0x0D
+mov	r2,#0x1A
+mov	r3,#0
+.short	0xF800
+
 End:
 pop	{r4-r6}
 pop	{r0}
