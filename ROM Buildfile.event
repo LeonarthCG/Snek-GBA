@@ -165,6 +165,16 @@ SHORT 0 8
 #incext png2dmp "Graphics\snek.png" --palette-only
 
 ALIGN 4
+heckIMG:
+SHORT 0 64
+#incext png2dmp "Graphics\heck.png"
+
+ALIGN 4
+heckmirrorIMG:
+SHORT 0 64
+#incext png2dmp "Graphics\heckmirror.png"
+
+ALIGN 4
 titlescreenIMG:
 SHORT 0 9600
 #incbin "Graphics\titlescreen.img.bin"
@@ -198,4 +208,3 @@ ALIGN 4
 scoreTSA:
 SHORT 0 32
 #incbin "Graphics\score.tsa.bin"
-

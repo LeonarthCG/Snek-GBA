@@ -46,19 +46,23 @@ ldr	r3,=loadData
 mov	lr,r3
 .short	0xF800
 
-@set background 0 and 1 to 16 colors mode
-ldr	r0,=#0x04000000
-mov	r1,#1
-strb	r1,[r0,#8]
-strb	r1,[r0,#10]
-
 @enable all bgs
+ldr	r0,=#0x04000000
 mov	r1,#0xF
 strb	r1,[r0,#1]
 
-@lower bg 2 priority
+@bg 0 priority
+mov	r1,#2
+strb	r1,[r0,#0x8]
+@bg 1 priority
+mov	r1,#0
+strb	r1,[r0,#0xA]
+@bg 2 priority
 mov	r1,#3
 strb	r1,[r0,#0xC]
+@bg 3 priority
+mov	r1,#1
+strb	r1,[r0,#0xE]
 
 @lower bg 3 y coord a bit
 mov	r1,#0x1E
@@ -73,6 +77,30 @@ mov	lr,r3
 
 ldr	r0,=snekPAL
 ldr	r1,=#0x05000000
+ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+
+ldr	r0,=snekIMG
+ldrh	r0,[r0,#2]
+lsl	r0,#2
+ldr	r1,=#0x06000000
+add	r1,r0
+ldr	r0,=heckIMG
+ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+
+ldr	r0,=snekIMG
+ldrh	r0,[r0,#2]
+lsl	r0,#2
+ldr	r1,=#0x06000000
+add	r1,r0
+ldr	r0,=heckIMG
+ldrh	r0,[r0,#2]
+lsl	r0,#2
+add	r1,r0
+ldr	r0,=heckmirrorIMG
 ldr	r3,=loadData
 mov	lr,r3
 .short	0xF800
@@ -164,7 +192,9 @@ ldrb	r1,[r0]
 mov	r0,#8
 and	r0,r1
 cmp	r0,#0
-beq	pauseGame
+bne	dontpauseGame
+b	pauseGame
+dontpauseGame:
 
 ldr	r2,=#0x02000000
 ldr	r3,=#0x04000130
@@ -242,6 +272,12 @@ ldr	r0,=moveSnake
 mov	lr,r0
 .short	0xF800
 
+@check for game over
+ldr	r0,=#0x02000000
+ldrb	r3,[r0,#0xD]
+cmp	r3,#0xFF
+beq	gameover
+
 ldr	r0,=eatEgg
 mov	lr,r0
 .short	0xF800
@@ -280,10 +316,61 @@ swi	#5		@wait for vblank
 b	main
 
 gameover:
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
 @death animation
 ldr	r0,=killSnake
 mov	lr,r0
 .short	0xF800
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#1
+strb	r1,[r0,#1]	@set bg 1 to be updated
+ldr	r0,=copyBuffers
+mov	lr,r0
+.short	0xF800
+ldr	r0,=#0x02000000
+add	r0,#0x10
+mov	r1,#0
+strb	r1,[r0,#1]	@set bg 1 to not be updated
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
 @back to title screen
 ldr	r0,=fadeOut
 mov	lr,r0
