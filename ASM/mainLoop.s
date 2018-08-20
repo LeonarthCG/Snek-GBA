@@ -253,6 +253,13 @@ b	skipSnake
 runSnake:
 strh	r3,[r0,#0x18]	@update counter
 
+@check for win
+ldrb	r3,[r0,#0xD]
+cmp	r3,#0xFE
+bne	notWIN1
+b	WIN
+notWIN1:
+
 @check for game over
 ldrb	r3,[r0,#0xD]
 cmp	r3,#0xFF
@@ -272,8 +279,15 @@ ldr	r0,=moveSnake
 mov	lr,r0
 .short	0xF800
 
-@check for game over
+@check for win
 ldr	r0,=#0x02000000
+ldrb	r3,[r0,#0xD]
+cmp	r3,#0xFE
+bne	notWIN2
+b	WIN
+notWIN2:
+
+@check for game over
 ldrb	r3,[r0,#0xD]
 cmp	r3,#0xFF
 beq	gameover
@@ -443,3 +457,7 @@ ldr	r3,=#0x04000100
 ldrh	r3,[r3,#4]	@counter
 strh	r3,[r0,#0x18]	@counter last time logic was ran
 b	main
+
+WIN:
+swi	#5
+b	WIN

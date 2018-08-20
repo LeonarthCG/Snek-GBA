@@ -185,7 +185,6 @@ b	End
 doGrow:
 ldrh	r3,[r4]
 add	r3,#1
-strh	r3,[r4]
 @check if the snake is going to hit herself
 push	{r0-r3}
 mov	r0,r1
@@ -204,6 +203,7 @@ strh	r0,[r4,#0x1A]
 ldrh	r0,[r4,#0x16]
 sub	r0,#1
 strh	r0,[r4,#0x16]
+strh	r3,[r4]
 b	End
 
 End:
