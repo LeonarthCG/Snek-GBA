@@ -201,6 +201,9 @@ add	r0,#1
 strb	r2,[r4,r0]
 mov	r0,#0
 strh	r0,[r4,#0x1A]
+ldrh	r0,[r4,#0x16]
+sub	r0,#1
+strh	r0,[r4,#0x16]
 b	End
 
 End:

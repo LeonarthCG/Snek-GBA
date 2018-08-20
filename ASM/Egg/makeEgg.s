@@ -19,6 +19,7 @@ add	r0,#20
 strb	r0,[r1,#0x14]
 
 @choose a tile from the list
+rngFailsafe:
 ldr	r0,=rng
 mov	lr,r0
 .short	0xF800
@@ -31,6 +32,8 @@ swi	#6		@divide random number by length/2 +1
 lsl	r1,#1
 ldr	r3,=#0x02005000
 ldrh	r0,[r3,r1]
+cmp	r0,#0
+beq	rngFailsafe	@just in case
 
 @store coords
 ldr	r3,=#0x02000000
