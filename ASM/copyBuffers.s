@@ -24,9 +24,9 @@ beq	next
 loop2:
 ldr	r6,[r0,r2]
 str	r6,[r1,r2]
+add	r2,#4
 cmp	r2,r3
 beq	next
-add	r2,#4
 b	loop2
 next:
 add	r7,#1

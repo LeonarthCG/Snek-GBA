@@ -61,6 +61,10 @@ makeTileAttribute:
 #inctext lyn "ASM\makeTileAttribute.elf" //piece together the short for the tile based on the attributes
 
 ALIGN 4
+changeSpeed:
+#inctext lyn "ASM\changeSpeed.elf" //draws speed option to titlescreen and handles changing between options
+
+ALIGN 4
 loadData:
 #inctext lyn "ASM\loadData.elf" //load data from source to destination
 
@@ -155,6 +159,20 @@ WORD $0600E800
 WORD $0600E000
 
 ALIGN 4
+speedTSAs:
+POIN slowTSA
+POIN normalTSA
+POIN fastTSA
+POIN tasTSA
+
+ALIGN 4
+speedSpeeds:
+BYTE 16
+BYTE 8
+BYTE 4
+BYTE 1
+
+ALIGN 4
 snekIMG:
 SHORT 0 440
 #incext png2dmp "Graphics\snek.png"
@@ -195,9 +213,34 @@ SHORT 0 256
 #incext png2dmp "Graphics\pressstart.png"
 
 ALIGN 4
+speedIMG:
+SHORT 0 416
+#incext png2dmp "Graphics\speed.png"
+
+ALIGN 4
 presstartTSA:
 SHORT 0 25
 #incbin "Graphics\pressstart.tsa.bin"
+
+ALIGN 4
+slowTSA:
+SHORT 0 25
+#incbin "Graphics\slow.tsa.bin"
+
+ALIGN 4
+normalTSA:
+SHORT 0 25
+#incbin "Graphics\normal.tsa.bin"
+
+ALIGN 4
+fastTSA:
+SHORT 0 25
+#incbin "Graphics\fast.tsa.bin"
+
+ALIGN 4
+tasTSA:
+SHORT 0 25
+#incbin "Graphics\tas.tsa.bin"
 
 ALIGN 4
 backgroundgridTSA:

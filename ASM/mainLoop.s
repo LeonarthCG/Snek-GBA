@@ -27,6 +27,14 @@ ldr	r2,=#0x200
 ldr	r0,=fillDest
 mov	lr,r0
 mov	r0,#0
+ldr	r1,=bgTilemaps
+ldr	r1,[r1,#12]
+ldr	r2,=#0x200
+.short	0xF800
+
+ldr	r0,=fillDest
+mov	lr,r0
+mov	r0,#0
 ldr	r1,=bgTilemapsBuffer
 ldr	r1,[r1,#12]
 ldr	r2,=#0x200
@@ -69,6 +77,10 @@ mov	r1,#0x1E
 ldr	r2,=#0xFFFD
 strh	r2,[r0,r1]
 
+@move bg 2 to the center
+mov	r1,#0
+strh	r1,[r0,#0x18]
+
 ldr	r0,=snekIMG
 ldr	r1,=#0x06000000
 ldr	r3,=loadData
@@ -105,8 +117,12 @@ ldr	r3,=loadData
 mov	lr,r3
 .short	0xF800
 
+@change speed
 ldr	r0,=#0x02000000
-mov	r1,#8
+ldr	r1,=#0x0E000000
+ldrb	r1,[r1,#2]
+ldr	r2,=speedSpeeds
+ldrb	r1,[r2,r1]
 strb	r1,[r0,#3]	@speed
 
 ldr	r0,=startSnake

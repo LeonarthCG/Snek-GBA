@@ -78,8 +78,9 @@ bne	dontset0
 mov	r1,#0
 strb	r1,[r0]
 strb	r1,[r0,#1]
-strb	r1,[r0,#2]
 strb	r1,[r0,#3]
+mov	r1,#1
+strb	r1,[r0,#2]
 dontset0:
 
 swi	#5
