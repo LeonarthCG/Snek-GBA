@@ -1,0 +1,114 @@
+ALIGN 4
+snekIMG:
+SHORT 0 440
+#incext png2dmp "Graphics\snek.png"
+
+ALIGN 4
+snekPAL:
+SHORT 0 8
+#incext png2dmp "Graphics\snek.png" --palette-only
+
+ALIGN 4
+heckIMG:
+SHORT 0 64
+#incext png2dmp "Graphics\heck.png"
+
+ALIGN 4
+heckmirrorIMG:
+SHORT 0 64
+#incext png2dmp "Graphics\heckmirror.png"
+
+ALIGN 4
+titlescreenIMG:
+SHORT 0 9600
+#incbin "Graphics\titlescreen.img.bin"
+
+ALIGN 4
+titlescreenPAL:
+SHORT 0 128
+#incbin "Graphics\titlescreen.pal.bin"
+
+ALIGN 4
+winscreenIMG:
+SHORT 0 9600
+#incbin "Graphics\winscreen.img.bin"
+
+ALIGN 4
+winscreenPAL:
+SHORT 0 128
+#incbin "Graphics\winscreen.pal.bin"
+
+ALIGN 4
+titlescreenTSA:
+SHORT 0 320
+#incbin "Graphics\titlescreen.tsa.bin"
+
+ALIGN 4
+presstartIMG:
+SHORT 0 256
+#incext png2dmp "Graphics\pressstart.png"
+
+ALIGN 4
+presstartTSA:
+SHORT 0 25
+#incbin "Graphics\pressstart.tsa.bin"
+
+ALIGN 4
+speedIMG:
+SHORT 0 416
+#incext png2dmp "Graphics\speed.png"
+
+ALIGN 4
+slowTSA:
+SHORT 0 25
+#incbin "Graphics\slow.tsa.bin"
+
+ALIGN 4
+normalTSA:
+SHORT 0 25
+#incbin "Graphics\normal.tsa.bin"
+
+ALIGN 4
+fastTSA:
+SHORT 0 25
+#incbin "Graphics\fast.tsa.bin"
+
+ALIGN 4
+tasTSA:
+SHORT 0 25
+#incbin "Graphics\tas.tsa.bin"
+
+ALIGN 4
+githubIMG:
+SHORT 0 144
+#incext png2dmp "Graphics\github.png"
+
+ALIGN 4
+githubTSA:
+SHORT 0 9
+#incbin "Graphics\github.tsa.bin"
+
+ALIGN 4
+credits1IMG:
+SHORT 0 256
+#incext png2dmp "Graphics\credits1.png"
+
+ALIGN 4
+credits2IMG:
+SHORT 0 256
+#incext png2dmp "Graphics\credits2.png"
+
+ALIGN 4
+credits3IMG:
+SHORT 0 256
+#incext png2dmp "Graphics\credits3.png"
+
+ALIGN 4
+backgroundgridTSA:
+SHORT 0 320
+#incbin "Graphics\backgroundgrid.tsa.bin"
+
+ALIGN 4
+scoreTSA:
+SHORT 0 32
+#incbin "Graphics\score.tsa.bin"

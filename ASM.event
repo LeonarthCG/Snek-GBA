@@ -1,0 +1,110 @@
+ALIGN 4
+titlescreenLoop:
+#inctext lyn "ASM\titlescreenLoop.elf" //load the titlescreen and wait for a start press to begin the game
+
+ALIGN 4
+mainLoop:
+#inctext lyn "ASM\mainLoop.elf" //wait for vblank and execute the gameplay routines
+
+ALIGN 4
+interrupt:
+#inctext lyn "ASM\interrupt.elf" //change to thumb after waiting for vblank and acknowledge interrupt
+
+ALIGN 4
+fadeIn:
+#inctext lyn "ASM\fadeIn.elf"
+
+ALIGN 4
+fadeOut:
+#inctext lyn "ASM\fadeOut.elf"
+
+ALIGN 4
+rng:
+#inctext lyn "ASM\rng.elf" //get random number, return it in r0 and also set it as the next seed
+
+ALIGN 4
+drawTile:
+#inctext lyn "ASM\drawTile.elf" //draw tile at given coords and background layer
+
+ALIGN 4
+copyBuffers:
+#inctext lyn "ASM\copyBuffers.elf" //copy the tilemap buffers over to their destination
+
+ALIGN 4
+makeTileAttribute:
+#inctext lyn "ASM\makeTileAttribute.elf" //piece together the short for the tile based on the attributes
+
+ALIGN 4
+changeSpeed:
+#inctext lyn "ASM\changeSpeed.elf" //draws speed option to titlescreen and handles changing between options
+
+ALIGN 4
+doCredits:
+#inctext lyn "ASM\doCredits.elf" //handles the scrolling credits
+
+ALIGN 4
+loadData:
+#inctext lyn "ASM\loadData.elf" //load data from source to destination
+
+ALIGN 4
+fillDest:
+#inctext lyn "ASM\fillDest.elf" //fill destination with given value and size
+
+ALIGN 4
+updateScore:
+#inctext lyn "ASM\updateScore.elf" //update the SIZE and HIGH SCORE numbers, and save high score if needed
+
+ALIGN 4
+startSnake:
+#inctext lyn "ASM\Snake\startSnake.elf" //prepare the snake's starting position
+
+ALIGN 4
+turnSnake:
+#inctext lyn "ASM\Snake\turnSnake.elf" //change the direction the snake is heading towards
+//the snake can't change direction to the one she is already facing towards nor the one opposite to it
+//button presses are saved each frame, even if the game logic isn't run each frame, and are cleared at the end of this routine
+//this allows the player to input a direction for the snake to turn to without having to hold the button down waiting for the game logic
+//the snake also can't turn towards the border of the screen if adjacent to it
+//in addition, the snake can't turn if doing so is going to make her face her own body immediately
+
+ALIGN 4
+moveSnake:
+#inctext lyn "ASM\Snake\moveSnake.elf" //check if the snake has grown and move all pieces of the body as needed
+
+ALIGN 4
+bonkSnake:
+#inctext lyn "ASM\Snake\bonkSnake.elf" //check if the given coords are already occupied by snake, return 1 if it is
+
+ALIGN 4
+drawSnake:
+#inctext lyn "ASM\Snake\drawSnake.elf" //draw snake according to the positions
+
+ALIGN 4
+killSnake:
+#inctext lyn "ASM\Snake\killSnake.elf" //make the death animation happen
+
+ALIGN 4
+drawSnakeBody:
+#inctext lyn "ASM\Snake\drawSnakeBody.elf" //routine that specifically draws the body segments (so not head/tail/tongue)
+//the checks got long enough for it to justify a routine
+//snake body shapes are the -, the |, the luigi, the waluigi, the mirror luigi and the mirror waluigi, of course
+
+ALIGN 4
+makeEgg:
+#inctext lyn "ASM\Egg\makeEgg.elf" //spawn egg and write the coords and tile to ram for the drawEgg routine
+
+ALIGN 4
+eatEgg:
+#inctext lyn "ASM\Egg\eatEgg.elf" //check if head and egg are in the same coords, and if so remove egg and add size to snake
+
+ALIGN 4
+drawEgg:
+#inctext lyn "ASM\Egg\drawEgg.elf" //draw egg according to the coords and tile in ram
+
+ALIGN 4
+makeEggMap:
+#inctext lyn "ASM\Egg\makeEggMap.elf" //make the starting map for the egg
+
+ALIGN 4
+updateEggMap:
+#inctext lyn "ASM\Egg\updateEggMap.elf" //change tiles in egg map according to new head and tail positions

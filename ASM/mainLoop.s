@@ -73,9 +73,8 @@ mov	r1,#1
 strb	r1,[r0,#0xE]
 
 @lower bg 3 y coord a bit
-mov	r1,#0x1E
-ldr	r2,=#0xFFFD
-strh	r2,[r0,r1]
+ldr	r1,=#0xFFFD
+strh	r1,[r0,#0x1E]
 
 @move bg 2 to the center
 mov	r1,#0
@@ -369,6 +368,7 @@ ldr	r0,=#0x02000000
 add	r0,#0x10
 mov	r1,#0
 strb	r1,[r0,#1]	@set bg 1 to not be updated
+gameoverWin:
 swi	#5
 swi	#5
 swi	#5
@@ -475,5 +475,15 @@ strh	r3,[r0,#0x18]	@counter last time logic was ran
 b	main
 
 WIN:
+ldr	r0,=#0x0E000000
+mov	r1,#1
+strb	r1,[r0,#3]
 swi	#5
-b	WIN
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+swi	#5
+b	gameoverWin
