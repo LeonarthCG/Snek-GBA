@@ -20,5 +20,5 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 # Credits
 
 - Programming and Tiles: https://github.com/LeonarthCG
-- Title and Victory screens: https://twitter.com/CeciDibujera
+- Title and Victory screens: https://twitter.com/CeciDibujera https://ko-fi.com/A044FBN
 - Testing: Sme and 2wb/eliwan
