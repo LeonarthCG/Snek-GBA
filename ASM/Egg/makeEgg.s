@@ -2,6 +2,13 @@
 
 push	{lr}
 
+@check if max size reached
+ldr	r0,=#0x02000000
+ldrh	r0,[r0,#0xE]
+ldr	r1,=#540
+cmp	r0,r1
+bhs	End
+
 @check if egg exists
 ldr	r0,=#0x02000000
 ldrh	r0,[r0,#6]	@egg coords
