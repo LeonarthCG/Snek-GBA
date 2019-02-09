@@ -11,8 +11,8 @@ mov	r1,#1
 strb	r1,[r0,#8]	@set Master Interrupt Control to 1, enabling interrupts
 
 ldr	r0,=#0x04000200
-mov	r1,#1
-strh	r1,[r0]		@set first bit of REG_IE (enable irq v-blank)
+mov	r1,#0x19
+strh	r1,[r0]		@set first bit of REG_IE (enable irq v-blank), third and fourth for timer 0 and 1 overflow
 
 ldr	r0,=#0x04000004
 mov	r2,#8
@@ -42,7 +42,7 @@ ldr	r2,=#0xEEDB
 strh	r2,[r0,r1]	@start time for counter 2, 4389 until overflow
 add	r1,#2
 mov	r2,#0x81
-strh	r2,[r0,r1]	@counter 1 speed = 16.78MHz/64 and enable
+strh	r2,[r0,r1]	@counter 2 speed = 16.78MHz/64 and enable
 add	r1,#2
 mov	r2,#0x84
 @start time 0 for counter 3
@@ -83,7 +83,23 @@ mov	r1,#1
 strb	r1,[r0,#2]
 dontset0:
 
+@wait for v-blank
 swi	#5
+
+@prepare sound
+@set direct sound outputs and counters
+ldr	r0,=#0x4000080
+ldr	r1,=#0x730E
+strh	r1,[r0,#2]
+
+@enable sound
+ldr	r1,=#0x80
+strh	r1,[r0,#4]
+
+ldr	r0,=VideoGame7Data
+ldr	r3,=playSong
+mov	lr,r3
+.short	0xF800
 
 ldr	r0,=titlescreenLoop
 mov	lr,r0

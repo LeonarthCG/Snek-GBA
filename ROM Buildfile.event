@@ -28,6 +28,8 @@ romStart:
 
 #include "Graphics.event"
 
+#include "Sounds.event"
+
 ALIGN 4
 bgTilemapsBuffer:
 WORD $03000000
@@ -41,6 +43,13 @@ WORD $0600F800
 WORD $0600F000
 WORD $0600E800
 WORD $0600E000
+
+ALIGN 4
+soundCounters:
+WORD $02005500
+WORD $02005504
+WORD $02005508
+WORD $0200550C
 
 ALIGN 4
 speedTSAs:

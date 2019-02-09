@@ -108,3 +108,8 @@ makeEggMap:
 ALIGN 4
 updateEggMap:
 #inctext lyn "ASM\Egg\updateEggMap.elf" //change tiles in egg map according to new head and tail positions
+
+ALIGN 4
+playSong:
+#inctext lyn "ASM\Sound\playSong.elf" //start song
+

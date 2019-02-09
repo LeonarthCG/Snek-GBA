@@ -13,12 +13,25 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 
 # Controls
 
-- D-pad: Turn Snake. Switch between speeds options in the title screen.
-- Enter: Start game. Pause/Unpause game.
-- Select: Change between titlescreens (only if max score has been reached).
+* D-pad: Turn Snake. Switch between speeds options in the title screen.
+* Enter: Start game. Pause/Unpause game.
+* Select: Change between titlescreens (only if max score has been reached).
 
 # Credits
 
-- Programming and Tiles: https://github.com/LeonarthCG
-- Title and Victory screens: https://twitter.com/CeciDibujera https://ko-fi.com/A044FBN
-- Testing: Sme and 2wb/eliwan
+* Programming and Tiles: https://github.com/LeonarthCG
+* Title and Victory screens: https://twitter.com/CeciDibujera https://ko-fi.com/A044FBN
+* Testing: Sme and 2wb/eliwan
+* Sound: https://Freesound.org, full credits on the sound section.
+
+# Sounds
+
+All songs and sound effects are from freesound.org.
+
+The following changes were done to all of the sounds using Wavosaur, unless they already had that propierty:
+* Resampled to 11025hz.
+* Bit depth changed to 8bits.
+* All songs convertd to .bin format using Wav2gba.
+
+A full list of credits for all sounds:
+* [Main Theme: Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/)

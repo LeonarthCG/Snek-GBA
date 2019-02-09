@@ -1,0 +1,10 @@
+ALIGN 4
+VideoGame7Data:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 1597312		//length in bytes
+POIN VideoGame7
+POIN VideoGame7Data
+
+ALIGN 4
+VideoGame7:
+#incbin "Sounds\VideoGame7.bin"
