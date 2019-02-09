@@ -13,12 +13,12 @@ BYTE 0 //main unit, 0 for gba
 BYTE 0 //device type
 BYTE 0 0 0 0 0 0 0 //some empty bytes
 BYTE 0 //software version
-BYTE $A7 //checksum of bytes A0 to BC, ((0 - each byte) - $19 )&0xFF, I should make a tool to calculate it at some point
+BYTE $8F //checksum of bytes A0 to BC, ((0 - each byte) - $19 )&0xFF
 SHORT 0 //some empty bytes
 
 //the strings for the header
-PUSH; ORG $A0; String(DEMO); POP
-PUSH; ORG $AC; String(DEMO); POP
+PUSH; ORG $A0; String(SNEK); POP
+PUSH; ORG $AC; String(SNEK); POP
 PUSH; ORG $B0; String(00); POP
 
 romStart:
