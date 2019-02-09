@@ -34,21 +34,21 @@ mov	r1,#0x10
 add	r2,#4
 strb	r1,[r0,r2]	@start with a black screen
 
-@enable timer 0, 1 and 2
-ldr	r1,=#0x100
+@enable timers 2 and 3
+ldr	r0,=#0x04000000
+ldr	r1,=#0x108
+@used for the first rng seed
 ldr	r2,=#0xEEDB
-strh	r2,[r0,r1]	@start time for counter 0, 4389 until overflow
+strh	r2,[r0,r1]	@start time for counter 2, 4389 until overflow
 add	r1,#2
 mov	r2,#0x81
-strh	r2,[r0,r1]	@speed = 16.78MHz/64
+strh	r2,[r0,r1]	@counter 1 speed = 16.78MHz/64 and enable
 add	r1,#2
 mov	r2,#0x84
+@start time 0 for counter 3
 add	r1,#2
 strh	r2,[r0,r1]	@count up when the previous one overflows
 @this, if my math is right, should be 16.78MHz/64/4389 = 59.73Hz, the refresh rate of the console
-add	r1,#4
-mov	r2,#0x80
-strh	r2,[r0,r1]	@used for the first rng seed
 
 @set the offset for the bg map
 mov	r1,#0x1F

@@ -240,8 +240,8 @@ noButtons2:
 
 ldr	r0,=#0x02000000
 ldr	r3,=#0x04000100
-ldrh	r3,[r3,#4]	@counter
-ldrb	r1,[r0,#4]	@counter checked
+ldrh	r3,[r3,#12]	@counter
+ldrb	r1,[r0,#12]	@counter checked
 cmp	r1,#1
 beq	counterused
 strh	r3,[r0,#0x18]	@counter last time logic was ran

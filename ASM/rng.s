@@ -10,7 +10,7 @@ strb	r3,[r1,#12]
 cmp	r2,#0
 bne	notfirst
 ldr	r2,=#0x04000100
-ldrh	r0,[r2,#8]
+ldrh	r0,[r2,#12]
 b	wasfirst
 
 notfirst:
