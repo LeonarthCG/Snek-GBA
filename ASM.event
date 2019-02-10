@@ -113,3 +113,7 @@ ALIGN 4
 playSong:
 #inctext lyn "ASM\Sound\playSong.elf" //start song
 
+ALIGN 4
+playSound:
+#inctext lyn "ASM\Sound\playSound.elf" //start sfx
+
