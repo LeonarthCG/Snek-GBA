@@ -12,7 +12,7 @@ VideoGame7:
 ALIGN 4
 Water_GulpData:
 WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
-WORD 1840		//length in bytes
+WORD 1824		//length in bytes
 POIN Water_Gulp
 POIN 0
 
@@ -23,7 +23,7 @@ Water_Gulp:
 ALIGN 4
 SelectData:
 WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
-WORD 6064		//length in bytes
+WORD 2400		//length in bytes
 POIN Select
 POIN 0
 
@@ -34,7 +34,7 @@ Select:
 ALIGN 4
 Game_StartData:
 WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
-WORD 31216		//length in bytes
+WORD 14112		//length in bytes
 POIN Game_Start
 POIN 0
 
@@ -45,7 +45,7 @@ Game_Start:
 ALIGN 4
 heavy_impact_1Data:
 WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
-WORD 3616		//length in bytes
+WORD 2656		//length in bytes
 POIN heavy_impact_1
 POIN 0
 
@@ -56,7 +56,7 @@ heavy_impact_1:
 ALIGN 4
 OKAYData:
 WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
-WORD 6368		//length in bytes
+WORD 6016		//length in bytes
 POIN OKAY
 POIN 0
 

@@ -255,6 +255,19 @@ ldr	r0,=fadeOut
 mov	lr,r0
 .short	0xF800
 
+@wait for sound effect
+push	{r4}
+ldr	r4,=soundCounters
+ldr	r4,[r4,#12]
+soundloop:
+ldr	r0,[r4]
+cmp	r0,#0
+beq	sounddone
+swi	#5
+b	soundloop
+sounddone:
+pop	{r4}
+
 ldr	r0,=mainLoop
 mov	lr,r0
 .short	0xF800

@@ -54,11 +54,16 @@ ldr	r0,=#0x4000100
 mov	r1,#0
 strh	r1,[r0,#2]
 @start next song (or loop)
-ldr	r0,=soundCounters
-ldr	r0,[r0,#4]
+ldr	r1,=soundCounters
+ldr	r0,[r1,#4]
 ldr	r0,[r0]		@next song data
-cmp	r0,#0
 ldr	r0,[r0,#12]
+mov	r2,#0
+ldr	r3,[r1]
+str	r2,[r3]
+ldr	r3,[r1,#4]
+str	r2,[r3]
+cmp	r0,#0
 beq	endcounter0
 ldr	r3,=playSong
 mov	lr,r3
@@ -97,10 +102,15 @@ ldr	r0,=#0x4000100
 mov	r1,#0
 strh	r1,[r0,#6]
 @start next sound (or loop)
-ldr	r0,=soundCounters
-ldr	r0,[r0,#12]
+ldr	r1,=soundCounters
+ldr	r0,[r1,#12]
 ldr	r0,[r0]		@next sound data
 ldr	r0,[r0,#12]
+mov	r2,#0
+ldr	r3,[r1,#8]
+str	r2,[r3]
+ldr	r3,[r1,#12]
+str	r2,[r3]
 cmp	r0,#0
 beq	endcounter1
 ldr	r3,=playSound

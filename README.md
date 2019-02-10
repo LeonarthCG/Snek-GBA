@@ -33,6 +33,7 @@ The following changes were done to all of the sounds using Wavosaur, unless they
 * Resampled to 11025hz.
 * Bit depth changed to 8bits.
 * Normalized to 0db.
+* Trimmed the empty ends of the non-looping sounds.
 * All songs convertd to .bin format using Wav2gba.
 
 A full list of credits for all sounds:
