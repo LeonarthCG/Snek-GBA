@@ -19,4 +19,10 @@ $02000018  SHORT  FPS counter last time logic was ran
 $0200001A  SHORT  Previous position of tail (used for the list at $02005000), 0 if the snek just grew
 ...
 $02000020  LIST   Snake body piece coordinates
+...
 $02005000  LIST   Buffer with available tiles for eggs, updated when the snake moves
+...
+$02005500  WORD   Current song samples played
+$02005504  POIN   Current song
+$02005508  WORD   Current sfx samples played
+$0200550C  POIN   Current sfx

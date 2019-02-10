@@ -49,12 +49,12 @@ ldrb	r3,[r1,#2]
 cmp	r3,#0x10
 bne	higher
 cmp	r0,#0
-beq	drawSpeed
+beq	End
 sub	r0,#1
 b	drawSpeed
 higher:
 cmp	r0,#3
-beq	drawSpeed
+beq	End
 add	r0,#1
 b	drawSpeed
 
@@ -67,6 +67,11 @@ ldr	r1,=bgTilemaps
 ldr	r2,=#0x3CC
 add	r1,r2
 ldr	r3,=loadData
+mov	lr,r3
+.short	0xF800
+@play sound
+ldr	r0,=SelectData
+ldr	r3,=playSound
 mov	lr,r3
 .short	0xF800
 pop	{r0}

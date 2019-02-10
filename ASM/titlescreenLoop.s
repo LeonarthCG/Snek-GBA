@@ -246,6 +246,11 @@ ldr	r0,=#0x04000000
 mov	r1,#3
 strb	r1,[r0,#1]
 
+ldr	r0,=Game_StartData
+ldr	r3,=playSound
+mov	lr,r3
+.short	0xF800
+
 ldr	r0,=fadeOut
 mov	lr,r0
 .short	0xF800

@@ -8,3 +8,58 @@ POIN VideoGame7Data
 ALIGN 4
 VideoGame7:
 #incbin "Sounds\VideoGame7.bin"
+
+ALIGN 4
+Water_GulpData:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 1840		//length in bytes
+POIN Water_Gulp
+POIN 0
+
+ALIGN 4
+Water_Gulp:
+#incbin "Sounds\Water_Gulp.bin"
+
+ALIGN 4
+SelectData:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 6064		//length in bytes
+POIN Select
+POIN 0
+
+ALIGN 4
+Select:
+#incbin "Sounds\Select.bin"
+
+ALIGN 4
+Game_StartData:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 31216		//length in bytes
+POIN Game_Start
+POIN 0
+
+ALIGN 4
+Game_Start:
+#incbin "Sounds\Game_Start.bin"
+
+ALIGN 4
+heavy_impact_1Data:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 3616		//length in bytes
+POIN heavy_impact_1
+POIN 0
+
+ALIGN 4
+heavy_impact_1:
+#incbin "Sounds\heavy_impact_1.bin"
+
+ALIGN 4
+OKAYData:
+WORD -(16777216/11025)	//0 - (gba clock speed divided by frequency) = samplerate
+WORD 6368		//length in bytes
+POIN OKAY
+POIN 0
+
+ALIGN 4
+OKAY:
+#incbin "Sounds\OKAY.bin"

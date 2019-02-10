@@ -5,7 +5,7 @@ ldr	r0,=fillDest
 mov	lr,r0
 mov	r0,#0		@value to fill with
 ldr	r1,=#0x02000000	@destination
-ldr	r2,=#0x1600	@size in words
+ldr	r2,=#0x1540	@size in words
 .short	0xF800
 
 ldr	r0,=fillDest
@@ -345,6 +345,10 @@ swi	#5		@wait for vblank
 b	main
 
 gameover:
+ldr	r0,=heavy_impact_1Data
+ldr	r3,=playSound
+mov	lr,r3
+.short	0xF800
 swi	#5
 swi	#5
 swi	#5
@@ -410,6 +414,10 @@ mov	lr,r0
 .short	0xF800
 
 pauseGame:
+ldr	r0,=SelectData
+ldr	r3,=playSound
+mov	lr,r3
+.short	0xF800
 @darken screen
 ldr	r0,=#0x04000000
 mov	r1,#0x54
@@ -460,6 +468,10 @@ swi	#5
 swi	#5
 swi	#5
 swi	#5
+ldr	r0,=SelectData
+ldr	r3,=playSound
+mov	lr,r3
+.short	0xF800
 swi	#5
 swi	#5
 @undarken screen
@@ -475,6 +487,10 @@ strh	r3,[r0,#0x18]	@counter last time logic was ran
 b	main
 
 WIN:
+ldr	r0,=OKAYData
+ldr	r3,=playSound
+mov	lr,r3
+.short	0xF800
 ldr	r0,=#0x0E000000
 mov	r1,#1
 strb	r1,[r0,#3]

@@ -104,6 +104,16 @@ SHORT 0 256
 #incext png2dmp "Graphics\credits3.png"
 
 ALIGN 4
+credits4IMG:
+SHORT 0 256
+#incext png2dmp "Graphics\credits4.png"
+
+ALIGN 4
+credits5IMG:
+SHORT 0 256
+#incext png2dmp "Graphics\credits5.png"
+
+ALIGN 4
 backgroundgridTSA:
 SHORT 0 320
 #incbin "Graphics\backgroundgrid.tsa.bin"

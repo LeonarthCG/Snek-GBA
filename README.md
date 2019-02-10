@@ -29,9 +29,16 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 All songs and sound effects are from freesound.org.
 
 The following changes were done to all of the sounds using Wavosaur, unless they already had that propierty:
+* Changed format to .wav.
 * Resampled to 11025hz.
 * Bit depth changed to 8bits.
+* Normalized to 0db.
 * All songs convertd to .bin format using Wav2gba.
 
 A full list of credits for all sounds:
-* [Main Theme: Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/)
+* Main theme: [Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/)
+* Eat egg: [Water_Gulp.wav by Q.K.](https://freesound.org/people/Q.K./sounds/56271/)
+* Change speed, pause/unpause: [Select by TiesWijnen](https://freesound.org/people/TiesWijnen/sounds/413310/)
+* Start game: [Game Start by plasterbrain](https://freesound.org/people/plasterbrain/sounds/243020/)
+* Game over: [heavy impact 1 by aropson](https://freesound.org/people/aropson/sounds/429169/)
+* Victory: [OKAY! by Scrampunk](https://freesound.org/people/Scrampunk/sounds/345299/)
