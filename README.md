@@ -29,6 +29,7 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 All songs and sound effects are from freesound.org.
 
 The following changes were done to all of the sounds using Wavosaur, unless they already had that propierty:
+* Converted to Mono.
 * Changed format to .wav.
 * Resampled to 11025hz.
 * Bit depth changed to 8bits.
@@ -37,9 +38,9 @@ The following changes were done to all of the sounds using Wavosaur, unless they
 * All songs convertd to .bin format using Wav2gba.
 
 A full list of credits for all sounds:
-* Main theme: [Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/)
-* Eat egg: [Water_Gulp.wav by Q.K.](https://freesound.org/people/Q.K./sounds/56271/)
-* Change speed, pause/unpause: [Select by TiesWijnen](https://freesound.org/people/TiesWijnen/sounds/413310/)
-* Start game: [Game Start by plasterbrain](https://freesound.org/people/plasterbrain/sounds/243020/)
-* Game over: [heavy impact 1 by aropson](https://freesound.org/people/aropson/sounds/429169/)
-* Victory: [OKAY! by Scrampunk](https://freesound.org/people/Scrampunk/sounds/345299/)
+* Main theme: [Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/) under the [Attribution Noncommercial License](https://creativecommons.org/licenses/by-nc/3.0/)
+* Eat egg: [Water_Gulp.wav by Q.K.](https://freesound.org/people/Q.K./sounds/56271/) under the [Creative Commons 0 License](https://creativecommons.org/publicdomain/zero/1.0/)
+* Change speed, pause/unpause: [Select by TiesWijnen](https://freesound.org/people/TiesWijnen/sounds/413310/) under the [Creative Commons 0 License](https://creativecommons.org/publicdomain/zero/1.0/)
+* Start game: [Game Start by plasterbrain](https://freesound.org/people/plasterbrain/sounds/243020/) under the [Creative Commons 0 License](https://creativecommons.org/publicdomain/zero/1.0/)
+* Game over: [heavy impact 1 by aropson](https://freesound.org/people/aropson/sounds/429169/) under the [Attribution License](https://creativecommons.org/licenses/by/3.0/)
+* Victory: [OKAY! by Scrampunk](https://freesound.org/people/Scrampunk/sounds/345299/) under the [Attribution License](https://creativecommons.org/licenses/by/3.0/)
