@@ -62,6 +62,19 @@ strb	r1,[r0,#15]	@set the offset for the bg map 3
 
 @set the first 4 bytes of the save to 0
 ldr	r0,=#0x0E000000
+ldrb	r1,[r0,#2]
+cmp	r1,#3
+bhi	resetSave
+ldrb	r1,[r0]
+ldrb	r2,[r0,#1]
+lsl	r2,#8
+orr	r1,r2
+ldr	r2,=#540
+cmp	r1,r2
+bhi	resetSave
+ldrb	r1,[r0,#3]
+cmp	r1,#1
+bhi	resetSave
 mov	r2,#0xFF
 ldrb	r1,[r0]
 cmp	r1,r2
@@ -75,6 +88,7 @@ bne	dontset0
 ldrb	r1,[r0,#3]
 cmp	r1,r2
 bne	dontset0
+resetSave:
 mov	r1,#0
 strb	r1,[r0]
 strb	r1,[r0,#1]
