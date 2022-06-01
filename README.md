@@ -1,7 +1,7 @@
 # Snek GBA
 
 Snek GBA is a homebrew Game Boy Advance Snake clone.
-The game code is written in asm and compiled with devkitARM.
+The game's code is written in asm and compiled with devkitARM.
 The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 
 # Build Instructions
@@ -13,8 +13,8 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 
 # Controls
 
-* D-pad: Turn Snake. Switch between speeds options in the title screen.
-* Enter: Start game. Pause/Unpause game.
+* D-pad: Turn Snek. Switch between speeds options in the title screen.
+* Enter: Start game. Pause/Resume game.
 * Select: Change between titlescreens (only if max score has been reached).
 
 # Credits
@@ -22,22 +22,22 @@ The game is built with Event Assembler (EA), Lyn, and the EA Formatting Suite.
 * Programming and Tiles: https://github.com/LeonarthCG
 * Title and Victory screens: https://twitter.com/CeciDibujera https://ko-fi.com/A044FBN
 * Testing: Sme and 2wb/eliwan
-* Sound: https://Freesound.org, full credits on the sound section.
+* Sound: https://Freesound.org, full credits in the sound section.
 
 # Sounds
 
 All songs and sound effects are from freesound.org.
 
-The following changes were done to all of the sounds using Wavosaur, unless they already had that propierty:
+The following changes were done to all of the sounds using Wavosaur, unless they already had that property:
 * Converted to Mono.
 * Changed format to .wav.
 * Resampled to 11025hz.
 * Bit depth changed to 8bits.
 * Normalized to 0db.
-* Trimmed the empty ends of the non-looping sounds.
-* All songs convertd to .bin format using Wav2gba.
+* Silences trimmed for non-looping sounds.
+* And finally, convertd to .bin format using Wav2gba.
 
-A full list of credits for all sounds:
+A full list of credits for all sounds and songs:
 * Main theme: [Video Game 7.wav by djgriffin](https://freesound.org/people/djgriffin/sounds/172561/) under the [Attribution Noncommercial License](https://creativecommons.org/licenses/by-nc/3.0/)
 * Eat egg: [Water_Gulp.wav by Q.K.](https://freesound.org/people/Q.K./sounds/56271/) under the [Creative Commons 0 License](https://creativecommons.org/publicdomain/zero/1.0/)
 * Change speed, pause/unpause: [Select by TiesWijnen](https://freesound.org/people/TiesWijnen/sounds/413310/) under the [Creative Commons 0 License](https://creativecommons.org/publicdomain/zero/1.0/)
